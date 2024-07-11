@@ -1,0 +1,19 @@
+GET http://localhost:5000/usuarios
+
+###
+POST http://localhost:5000/montos
+Content-Type: application/json
+
+{
+    "id" : 2,
+    "nombre" : "nico",
+    "monto" : [20, 134]
+}
+
+###
+PUT  http://localhost:5000/montos/2/nico
+Content-Type: application/json
+
+{
+    "monto" : [20, 1340]
+}
