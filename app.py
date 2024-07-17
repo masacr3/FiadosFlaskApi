@@ -3,6 +3,7 @@ from flask_cors import CORS
 from db import init_db
 from routes.usuarios import init_usuarios_bp
 from routes.montos import init_montos_bp
+from routes.pagar import init_pagar_bp
 #from routes.objetivos import init_objetivos_bp
 
 app = Flask(__name__)
@@ -15,10 +16,12 @@ db, user = init_db()
 
 usuarios_bp = init_usuarios_bp(db, user)
 montos_bp = init_montos_bp(db,user)
+pagar_bp = init_pagar_bp(db,user)
 #objetivos_bp = init_objetivos_bp(db, user)
 
 app.register_blueprint(usuarios_bp, url_prefix='/usuarios')
 app.register_blueprint(montos_bp, url_prefix='/montos')
+app.register_blueprint(pagar_bp, url_prefix='/pagar')
 #app.register_blueprint(objetivos_bp, url_prefix='/objetivos')
 
 if __name__ == '__main__':

@@ -1,3 +1,11 @@
+POST http://localhost:5000/usuarios
+Content-Type: application/json
+
+{
+    "nombre" : "marto"
+}
+
+###
 GET http://localhost:5000/usuarios
 
 ###
@@ -17,3 +25,18 @@ Content-Type: application/json
 {
     "monto" : [20, 1340]
 }
+
+###
+POST http://localhost:5000/pagar
+Content-Type: application/json
+
+{
+    "id" : 2,
+    "nombre" : "nico",
+    "deuda_total" : 1360,
+    "pago_del_usuario" : 2000,
+    "fecha" : "20-3-24"
+}
+
+###
+GET http://localhost:5000/pagar

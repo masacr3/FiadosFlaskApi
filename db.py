@@ -5,4 +5,8 @@ def init_db():
     path = './db.json'
     db = TinyDB(path)
     User = Query()
+    checkPagos = db.get(User.pagos.exists())
+    print(f'estoy en init', checkPagos)
+    if not checkPagos:
+        db.insert({'pagos' : []})
     return db, User

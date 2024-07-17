@@ -3,6 +3,7 @@ from flask import Blueprint, request, jsonify
 montos_bp = Blueprint('montos', __name__)
 
 def init_montos_bp(db, User):
+
     @montos_bp.route('', methods=['POST'])
     def agregar_monto_al_usuario():
         data = request.get_json()

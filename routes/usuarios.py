@@ -11,10 +11,6 @@ def init_usuarios_bp(db, User):
         values = [data.get(item).lower() for item in interfaz if data.get(item)]
         check = len(values) == len(interfaz)
         if check:
-            usuario_existe = db.get(doc_id=data.get('id'))
-            if usuario_existe:
-                return jsonify({'error': 'Bad Request', 'mesaje': 'nombre ya existe en su base de datos'}), 409
-             
             for k, value in zip(interfaz, values):
                 usuario[k] = value
             usuario['tabla'] = 'usuarios'

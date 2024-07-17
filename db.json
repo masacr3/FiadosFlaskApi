@@ -1,1 +1,1 @@
-{"_default": {"1": {"nombre": "leo", "tabla": "usuarios", "monto": [2, 3, 4, 10, 305]}, "2": {"nombre": "nico", "tabla": "usuarios", "monto": [20, 1340]}}}
+{"_default": {"1": {"nombre": "leo", "tabla": "usuarios", "monto": [2, 3, 4, 10, 305]}, "2": {"nombre": "nico", "tabla": "usuarios", "monto": [20, 1340]}, "3": {"pagos": [{"id": 2, "nombre": "nico", "deuda_total": 1360, "pago_del_usuario": 2000, "fecha": "20-3-24", "tiket": "a6b43d3b-b383-4005-8dff-edc7e9bf4459"}]}, "4": {"nombre": "marto", "tabla": "usuarios", "monto": []}}}
