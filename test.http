@@ -2,7 +2,7 @@ POST http://localhost:5000/usuarios
 Content-Type: application/json
 
 {
-    "nombre" : "marto"
+    "nombre" : "leo"
 }
 
 ###
@@ -13,13 +13,13 @@ POST http://localhost:5000/montos
 Content-Type: application/json
 
 {
-    "id" : 2,
+    "id" : "a7503934-aa56-4737-8ca6-a1cf4a6962aa",
     "nombre" : "nico",
     "monto" : [20, 134]
 }
 
 ###
-PUT  http://localhost:5000/montos/2/nico
+PUT  http://localhost:5000/montos/a7503934-aa56-4737-8ca6-a1cf4a6962aa/nico
 Content-Type: application/json
 
 {
@@ -31,12 +31,20 @@ POST http://localhost:5000/pagar
 Content-Type: application/json
 
 {
-    "id" : 2,
+    "id" : "a7503934-aa56-4737-8ca6-a1cf4a6962aa",
     "nombre" : "nico",
-    "deuda_total" : 1360,
-    "pago_del_usuario" : 2000,
-    "fecha" : "20-3-24"
+    "deuda_total" : 200,
+    "pago_del_usuario" : 900,
+    "fecha" : "20-6-24"
 }
 
 ###
 GET http://localhost:5000/pagar
+
+###
+POST http://localhost:5000/pagar/reset
+Content-Type: application/json
+
+{
+    "secreto" : "7ri1GIrbw8hkAwK"
+}

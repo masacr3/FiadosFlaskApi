@@ -1,4 +1,5 @@
 from flask import Blueprint, request, jsonify
+import uuid
 
 usuarios_bp = Blueprint('usuarios', __name__)
 
@@ -13,9 +14,13 @@ def init_usuarios_bp(db, User):
         if check:
             for k, value in zip(interfaz, values):
                 usuario[k] = value
-            usuario['tabla'] = 'usuarios'
+            
+            usuarios = db.get(User.usuarios.exists())['usuarios']
+            usuario['id'] = str(uuid.uuid4())
             usuario['monto'] = []
-            db.insert(usuario)
+            usuarios.append(usuario)
+            db.update({"usuarios" : usuarios}, User.usuarios.exists())
+
             return jsonify({'mensaje':'Usuario agregado'}), 201
 
         else:
@@ -24,9 +29,7 @@ def init_usuarios_bp(db, User):
 
     @usuarios_bp.route('', methods=['GET'])
     def obtener_usuarios():
-        usuarios = db.search(User.tabla == 'usuarios')
-        for user in usuarios:
-            user['id'] = user.doc_id
+        usuarios = db.get(User.usuarios.exists())
         return jsonify(usuarios), 200
     
     return usuarios_bp
