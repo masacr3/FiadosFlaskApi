@@ -10,7 +10,7 @@ def init_pagar_bp(db, User):
     def full_reset():
         data = request.get_json()
         secreto_from_front = data.get('secreto')
-        if secreto_from_front == secrets_for_pagar():
+        if secrets_for_pagar and (secreto_from_front == secrets_for_pagar()):
             db.update({"pagos" : []}, User.pagos.exists())
             return jsonify({"mensaje" : "Se ha reseteado DB pagar"}), 200
         else:
@@ -30,10 +30,6 @@ def init_pagar_bp(db, User):
         values = [ data.get(item) for item in interfaz if data.get(item) ]
         check = len(values) == len(interfaz)
         if check:
-            # usuario_existe = db.get(doc_id = data.get('id'))
-            # if not usuario_existe or usuario_existe['nombre'] != data.get('nombre'):
-            #     return jsonify({'error':'Bad Request', 'mesaje':'usuario no existe en su base de datos'}), 400
-            
             usuarios = db.get(User.usuarios.exists())['usuarios']
             usuario = None
             for u in usuarios:
@@ -52,6 +48,12 @@ def init_pagar_bp(db, User):
             pago['tiket'] = str(uuid.uuid4())
             pagos.append(pago)
             db.update({"pagos" : pagos}, User.pagos.exists())
+
+            total = usuario['deuda_total'] - usuario['pago_del_usuario']
+            
+            #actualizo el total del usuario
+            usuario['monto'] = [0 if total <= 0 else total ]
+            db.update({'usuarios':usuarios}, User.usuarios.exists())
             
             return jsonify({'mensaje':'Pago realizado'}), 201
 

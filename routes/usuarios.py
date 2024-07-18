@@ -1,9 +1,22 @@
 from flask import Blueprint, request, jsonify
+from .secrets import secrets_for_usuarios
 import uuid
 
 usuarios_bp = Blueprint('usuarios', __name__)
 
 def init_usuarios_bp(db, User):
+
+    @usuarios_bp.route('/reset', methods=['POST'])
+    def eliminar_todos_los_usuarios():
+        data = request.get_json()
+        secreto_from_front = data.get('secreto')
+        if secrets_for_usuarios and (secreto_from_front == secrets_for_usuarios()):
+            db.update({"usuarios" : []}, User.usuarios.exists())
+            return jsonify({"mensaje" : "Se ha reseteado DB usuarios"}), 200
+        else:
+            return jsonify({"error" : "no tiene los permisos nesesarios para esta operacion"}), 403
+        
+
     @usuarios_bp.route('', methods=['POST'])
     def agregar_usuario():
         data = request.get_json()

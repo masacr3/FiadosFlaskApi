@@ -6,6 +6,14 @@ Content-Type: application/json
 }
 
 ###
+POST http://localhost:5000/usuarios/reset
+Content-Type: application/json
+
+{
+    "secreto" : "3OPqYnS1wPpsmUM"
+}
+
+###
 GET http://localhost:5000/usuarios
 
 ###
@@ -13,13 +21,13 @@ POST http://localhost:5000/montos
 Content-Type: application/json
 
 {
-    "id" : "a7503934-aa56-4737-8ca6-a1cf4a6962aa",
-    "nombre" : "nico",
+    "id" : "4d472208-91f8-446f-bf7e-ec674df4c709",
+    "nombre" : "leo",
     "monto" : [20, 134]
 }
 
 ###
-PUT  http://localhost:5000/montos/a7503934-aa56-4737-8ca6-a1cf4a6962aa/nico
+PUT  http://localhost:5000/montos/4d472208-91f8-446f-bf7e-ec674df4c709/leo
 Content-Type: application/json
 
 {
