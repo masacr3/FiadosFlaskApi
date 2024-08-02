@@ -34,11 +34,18 @@ def init_usuarios_bp(db, User):
             usuarios.append(usuario)
             db.update({"usuarios" : usuarios}, User.usuarios.exists())
 
-            return jsonify({'mensaje':'Usuario agregado'}), 201
+            return jsonify({'mensaje':'Usuario agregado', 'usuario':usuario}), 201
 
         else:
             return jsonify({'error': 'Bad Request', 'mesaje': 'nombre requerido'}), 400
         
+    
+    @usuarios_bp.route('/<string:id>', methods=['DELETE'])
+    def eliminar_usuario(id):
+        usuarios = db.get(User.usuarios.exists())['usuarios']
+        usuarioEliminado = [ usuario for usuario in usuarios if usuario['id'] != id ]
+        db.update({"usuarios" : usuarioEliminado}, User.usuarios.exists())
+        return jsonify({'mensaje' : 'usuario eliminado', 'data' : usuarioEliminado })
 
     @usuarios_bp.route('', methods=['GET'])
     def obtener_usuarios():

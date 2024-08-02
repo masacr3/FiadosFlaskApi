@@ -49,10 +49,10 @@ def init_pagar_bp(db, User):
             pagos.append(pago)
             db.update({"pagos" : pagos}, User.pagos.exists())
 
-            total = usuario['deuda_total'] - usuario['pago_del_usuario']
+            total = pago['deuda_total'] - pago['pago_del_usuario']
             
             #actualizo el total del usuario
-            usuario['monto'] = [0 if total <= 0 else total ]
+            usuario['monto'] = [] if total <= 0 else [total] 
             db.update({'usuarios':usuarios}, User.usuarios.exists())
             
             return jsonify({'mensaje':'Pago realizado'}), 201
