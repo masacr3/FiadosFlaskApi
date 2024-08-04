@@ -26,7 +26,7 @@ def init_pagar_bp(db, User):
     @pagar_bp.route('', methods=['POST'])
     def agregar_pago_del_usuario():
         data = request.get_json()
-        interfaz = ['id', 'nombre', 'deuda_total', 'pago_del_usuario' , 'fecha']
+        interfaz = ['id', 'nombre', 'deuda_total', 'pago_del_usuario' , 'fecha', 'monto']
         values = [ data.get(item) for item in interfaz if data.get(item) ]
         check = len(values) == len(interfaz)
         if check:
